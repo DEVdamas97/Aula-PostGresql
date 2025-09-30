@@ -1,5 +1,6 @@
 from db import conectar
 
+
 def criar_aluno(nome, idade):
     conexao, cursor = conectar()
     if conexao:
@@ -16,6 +17,7 @@ def criar_aluno(nome, idade):
         finally:
             cursor.close()
             conexao.close()
+
 
 def listar_alunos():
     conexao, cursor = conectar()
@@ -36,6 +38,7 @@ def listar_alunos():
             cursor.close()
             conexao.close()
 
+
 def atualizar_aluno(id_aluno, nova_idade):
     conexao, cursor = conectar()
     if conexao:
@@ -50,4 +53,18 @@ def atualizar_aluno(id_aluno, nova_idade):
             cursor.close()
             conexao.close()
 
+
+def deletar_aluno(id_aluno):
+    conexao, cursor = conectar()
+    if conexao:
+        try:
+            cursor.execute(
+                'DELETE FROM alunos WHERE id = %s', (id_aluno,)
+            )
+            conexao.commit()
+        except Exception as erro:
+            print(f"Erro ao deletar aluno: {erro}")
+        finally:
+            cursor.close()
+            conexao.close()
 
