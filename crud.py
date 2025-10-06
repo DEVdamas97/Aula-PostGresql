@@ -45,8 +45,9 @@ def atualizar_aluno(id_aluno, nova_idade):
         try:
             cursor.execute(
             "UPDATE alunos SET idade = %s WHERE id = %s",
-            (nova_idade, id)
+            (nova_idade, id_aluno)
             )
+            conexao.commit()
         except Exception as erro:
             print(f"Erro ao atualizar um aluno {erro}")
         finally:
